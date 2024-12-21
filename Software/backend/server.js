@@ -4,6 +4,7 @@ const connectDB = require('./config/db');
 const vehicleRoutes = require('./routes/vehicleRoutes');
 const driverRoutes = require('./routes/driverRoutes');
 const authRoutes = require('./routes/authRoutes');
+const maintenanceRoutes = require('./routes/maintenanceRoutes');
 
 dotenv.config();
 connectDB();
