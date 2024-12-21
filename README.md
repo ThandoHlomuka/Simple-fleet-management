@@ -1,8 +1,9 @@
 # Simple-fleet-management
 
-This is a simple fleet management project
+<h2> This is a simple fleet management project with the following features <h2/>
 
-Run the program using Node.js
+<h3> <li> Driver Management </li>   </h3>
+
 
 
 By Thando Hlomuka
