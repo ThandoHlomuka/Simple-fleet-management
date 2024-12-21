@@ -15,6 +15,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/vehicles', vehicleRoutes);
 app.use('/api/drivers', driverRoutes);
+app.use('/api/maintenance', maintenanceRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
