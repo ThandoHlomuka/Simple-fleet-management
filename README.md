@@ -2,7 +2,7 @@
 
 <h2> This is a simple fleet management project with the following features <h2/>
 
-<h3> <li> Driver Management </li>   </h3>
+<h3> <li> Driver Management </li> <li> Vehicle Management </li>   </h3>
 
 
 
