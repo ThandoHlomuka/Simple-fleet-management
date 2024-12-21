@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fleet Management - Real-Time Tracking</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 600px; }
+    </style>
+</head>
+<body>
+  
+  <h1>Real-Time Vehicle Tracking</h1>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([0, 0], 2);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        const markers = {};
+
+        async function fetchVehicleData() {
+            const response = await fetch('http://localhost:5000/api/vehicles');
+            const vehicles = await response.json();
+            vehicles.forEach(vehicle => {
+                const { vehicleId, latitude, longitude } = vehicle;
+                if (markers[vehicleId]) {
+                    markers[vehicleId].setLatLng([latitude, longitude]);
+                } else {
+                    markers[vehicleId] = L.marker([latitude, longitude]).addTo(map)
+                        .bindPopup(`Vehicle ID: ${vehicleId}`);
+                }
+            });
+        }
+
+        setInterval(fetchVehicleData, 5000); // Fetch data every 5 seconds
+    </script>
+</body>
+</html>
