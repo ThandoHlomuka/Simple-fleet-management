@@ -10,8 +10,8 @@ exports.getDrivers = async (req, res) => {
 };
 
 exports.createDriver = async (req, res) => {
-    const { name, licenseNumber, phone } = req.body;
-    const driver = new Driver({ name, licenseNumber, phone });
+    const { name, licenseNumber, phone, email } = req.body;
+    const driver = new Driver({ name, licenseNumber, phone, email });
     try {
         const savedDriver = await driver.save();
         res.status(201).json(savedDriver);
