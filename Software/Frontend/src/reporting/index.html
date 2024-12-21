@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fleet Management - Reporting</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Fleet Management Reports</h1>
+    
+    <h2>Vehicle Usage Report</h2>
+    <button onclick="fetchUsageReport()">Load Usage Report</button>
+    <table id="usageReport" style="display:none;">
+        <thead>
+            <tr>
+                <th>Vehicle ID</th>
+                <th>Model</th>
+                <th>Total Maintenance Cost</th>
+                <th>Maintenance Count</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h2>Fuel Consumption Report</h2>
+    <button onclick="fetchFuelReport()">Load Fuel Consumption Report</button>
+    <table id="fuelReport" style="display:none;">
+        <thead>
+            <tr>
+                <th>Vehicle ID</th>
+                <th>Model</th>
+                <th>Fuel Consumption (L/100km)</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        async function fetchUsageReport() {
+            const response = await fetch('http://localhost:5000/api/reports/usage');
+            const data = await response.json();
+            const tbody = document.querySelector('#usageReport tbody');
+            tbody.innerHTML = '';
+            data.forEach(item => {
+                const row = `<tr>
+                    <td>${item.vehicleId}</td>
+                    <td>${item.model}</td>
+                    <td>${item.totalMaintenanceCost}</td>
+                    <td>${item.maintenanceCount}</td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+            document.getElementById('usageReport').style.display = 'table';
+        }
+
+        async function fetchFuelReport() {
+            const response = await fetch('http://localhost:5000/api/reports/fuel');
+            const data = await response.json();
+            const tbody = document.querySelector('#fuelReport tbody');
+            tbody.innerHTML = '';
+            data.forEach(item => {
+                const row = `<tr>
+                    <td>${item.vehicleId}</td>
+                    <td>${item.model}</td>
+                    <td>${item.fuelConsumption}</td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+            document.getElementById('fuelReport').style.display = 'table';
+        }
+    </script>
+</body>
+</html>
