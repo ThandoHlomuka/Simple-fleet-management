@@ -10,7 +10,8 @@ const vehicleSchema = new mongoose.Schema({
     vehicleId: { type: String, required: true },
     latitude: { type: Number, required: true },
     longitude: { type: Number, required: true },
-    timestamp: { type: Date, default: Date.now 
+    timestamp: { type: Date, default: Date.now },
+    fuelConsumption: { type: Number, required: true },            
 });
 
 module.exports = mongoose.model('Vehicle', vehicleSchema);
