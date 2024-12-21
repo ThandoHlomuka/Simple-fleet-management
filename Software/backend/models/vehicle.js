@@ -7,6 +7,10 @@ const vehicleSchema = new mongoose.Schema({
     year: { type: Number, required: true },
     trips: { type: Number, required: true },
     status: { type: String, enum: ['active', 'inactive'], default: 'active' },
+    vehicleId: { type: String, required: true },
+    latitude: { type: Number, required: true },
+    longitude: { type: Number, required: true },
+    timestamp: { type: Date, default: Date.now 
 });
 
 module.exports = mongoose.model('Vehicle', vehicleSchema);
